@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoadBarwithSlider from './LoadBarWithSlider'
+import NavigatableList from './NavigatableList'
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<LoadBarwithSlider />, document.getElementById('root'));
+ReactDOM.render(<NavigatableList />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

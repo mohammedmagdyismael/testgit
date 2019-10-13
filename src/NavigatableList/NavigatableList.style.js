@@ -11,6 +11,9 @@ export const Container = styled.div`
     width : 200px;
     height : 20px;
   `;
+
+  export const Item = styled.li` 
+  `
   
   export const Fullrange = styled.div` 
     padding : 0.5px;

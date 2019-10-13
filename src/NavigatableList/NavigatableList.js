@@ -1,44 +1,71 @@
 import React from 'react'
-
+import {Item} from './NavigatableList.style'
 
 class NavigatableList extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            navCounterCurrent : 0,
+            navCounterPrev : 2,
+            selected : false
+        }
+    }
 
     componentDidMount(){
-        let allI = document.getElementsByClassName('x')
+        const allI = document.getElementsByClassName('x')
         let count = undefined;
 
         document.body.addEventListener('keydown',(e)=>{
+            
             //Up
-            if(e.which === 38){ 
-                if(count === undefined) count = allI.length - 1;
-                if (count === allI.length-1){ 
-                    allI[count-1].style.color = 'red';
-                    allI[count].style.color = 'black';
-                    count -= 1;
+            if(e.which === 38){  
+                if(this.state.selected){
+                    console.log(this.state.navCounterPrev,this.state.navCounterCurrent)
+                    Array.prototype.forEach.call(allI, function(el) {el.style.backgroundColor = "white";});
+                    this.setState({navCounterCurrent : this.state.navCounterPrev - 1,  navCounterPrev : this.state.navCounterPrev - 1},()=>{
+                        if (this.state.navCounterPrev >= 0){ 
+                            document.querySelectorAll('.x')[this.state.navCounterPrev].style.backgroundColor = "red";
+                        }
+                        else{
+                            this.setState({navCounterPrev : 2, navCounterCurrent : 2 },()=>{
+                                document.querySelectorAll('.x')[this.state.navCounterPrev].style.backgroundColor = "red";
+                            })
+                        }
+
+                    })
                 }
-                else if(count >= 0 && count < allI.length-1){ 
-                    if(count !== 0)count -= 1;   
-                    allI[count].style.color = 'red';
-                    allI[count+1].style.color = 'black';
+                else{
+                    Array.prototype.forEach.call(allI, function(el) {el.style.backgroundColor = "white";});
+                    document.querySelectorAll('.x')[this.state.navCounterPrev].style.backgroundColor = "red"; 
+                    this.setState({selected:true, navCounterCurrent : this.state.navCounterPrev})
                 }
             }
             //Down
-            else if(e.which === 40){ 
-                if(count === undefined || count === 0) {
-                    count = 0 ;
-                    allI[count].style.color = 'red';
-                    count += 1;
+            else if(e.which === 40){   
+                if(this.state.selected){
+                    Array.prototype.forEach.call(allI, function(el) {el.style.backgroundColor = "white";});
+                    this.setState({navCounterPrev : this.state.navCounterCurrent , navCounterCurrent : this.state.navCounterCurrent + 1},()=>{
+                        if (this.state.navCounterCurrent < allI.length){ 
+                            document.querySelectorAll('.x')[this.state.navCounterCurrent].style.backgroundColor = "red";
+                        }
+                        else{
+                            this.setState({navCounterCurrent : 0},()=>{
+                                document.querySelectorAll('.x')[this.state.navCounterCurrent].style.backgroundColor = "red";
+                            })
+                        }
+
+                    })
                 }
-                else if(count > 0 && count < allI.length ){
-                    if(count !== allI.length - 1)count += 1;  
-                    allI[count].style.color = 'red';
-                    allI[count - 1].style.color = 'black'  
+                else{
+                    Array.prototype.forEach.call(allI, function(el) {el.style.backgroundColor = "white";});
+                    document.querySelectorAll('.x')[this.state.navCounterCurrent].style.backgroundColor = "red"; 
+                    this.setState({selected:true})
                 }
             }
             //Enter
             else if(e.which === 13){
-                allI[count].click();
-                console.log(allI[count].innerHTML)
+                allI[this.state.navCounterCurrent].click(); 
+                console.log(allI[this.state.navCounterCurrent].innerHTML)
             }
         })
     }
@@ -46,9 +73,9 @@ class NavigatableList extends React.Component{
         return(
             <div >
                 <ul>
-                    <li id='list'><a className = 'x' href="#">First ink</a></li>
-                    <li id='list'><a className = 'x' href="#">Second Link</a></li>
-                    <li id='list'><a className = 'x' href="#">Third Link</a></li>
+                    <Item   id='list'><a className = 'x' href="#">First ink</a></Item>
+                    <Item  id='list'><a className = 'x' href="#">Second Link</a></Item>
+                    <Item  id='list'><a className = 'x' href="#">Third Link</a></Item>
                 </ul>
                 
             </div>

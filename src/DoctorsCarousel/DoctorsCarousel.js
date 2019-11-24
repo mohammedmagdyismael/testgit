@@ -16,7 +16,7 @@ class CarousalBanners extends React.Component{
     constructor(props){
         super(props);
         this.state = { 
-            BannersNumber : 7,
+            BannersNumber : 4,
             BannerIdx : 0,
             
             fullContainerWidth : 0,
@@ -97,15 +97,17 @@ class CarousalBanners extends React.Component{
 
     render(){
         return(
-        <GalleryContainer>
+        <GalleryContainer >
             <div style={{position: 'relative'}}> 
 
-                <SideIndicator style={{transform: 'scale(-1, 1)'}}> 
+                <SideIndicator onClick={()=>this.goLeft()} style={{transform: 'scale(-1, 1)'}}> 
                     <IndicatorCaret>❯</IndicatorCaret> 
                 </SideIndicator>
-                <SideIndicator style={{right: '0px'}}> 
+
+                <SideIndicator onClick={()=>this.goRight()} style={{right: '0px'}}> 
                     <IndicatorCaret>❯</IndicatorCaret> 
                 </SideIndicator>
+
                 <div style={{padding: '0px 28px'}}>
                     <Container id='container'>
                         {

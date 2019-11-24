@@ -16,7 +16,7 @@ export const Container = styled.div`
 ::-webkit-scrollbar { 
         display: none; 
       }
-      width: 340px;
+      width: 346px;
     height: 150px;
   border-radius: 5px;
 
@@ -27,7 +27,7 @@ export const Container = styled.div`
   scroll-snap-type: y mandatory;
 
   flex-direction: row-reverse; 
-    overflow: auto;  
+    overflow: hidden;  
     flex: 1;
     scroll-snap-align: start;
  

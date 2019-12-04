@@ -16,7 +16,7 @@ export const Container = styled.div`
 ::-webkit-scrollbar { 
         display: none; 
       }
-      width: 346px;
+      width: 336px;
     height: 150px;
   border-radius: 5px;
 

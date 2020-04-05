@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GMaps from './DoctorsCarousel'
+import GMaps from './RangeSlider'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<GMaps />, document.getElementById('root'));

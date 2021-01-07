@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OutboundTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<ListOfParameters>
+
+<Parameter>
+    <PlaceHolder>(PatientName)</PlaceHolder>
+    <Description>Patient Full Name</Description>
+ <Source>
+	<DataModel>
+	<Path>Patient/Name</Path>
+	<TName/>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+
+<!-- This paramter output is basically flat value, nothing special-->  
+<Parameter>
+    <PlaceHolder>(PatientMobileNumber)</PlaceHolder>
+    <Description>Patient Mobile Number</Description>
+ <Source>
+	<DataModel>
+	<Path>Patient/MobileNumber</Path>
+	<TName/>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+
+
+ <Parameter>
+    <PlaceHolder>(PatientEmails)</PlaceHolder>
+    <Description>Patient Email</Description>
+ <Source>
+	<DataModel>
+	<Path>Patient/EmailList[]</Path>
+	<TName>
+	<PropName>EmailAddress;eaddress</PropName>
+	<PropName>Type;emailtype</PropName>
+	</TName>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+ 
+   <Parameter>
+    <PlaceHolder>(PatientWorkEmail)</PlaceHolder>
+    <Description>Patient Work Email</Description>
+ <Source>
+	<DataModel>
+	<Path>Patient/EmailList[type = "work"]</Path>
+	<TName>
+	<PropName>EmailAddress;eaddress</PropName>
+	<PropName>Type;emailtype</PropName>
+	</TName>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+
+
+<Parameter>
+    <PlaceHolder>(PatientWorkEmail)</PlaceHolder>
+    <Description>Patient Work Email</Description>
+ <Source>
+	<DataModel>
+	<Path>Patient/EmailList[]/EmailAddress</Path>
+	<TName>
+	<PropName>EmailAddress;eaddress</PropName>
+	</TName>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+
+  <Parameter>
+    <PlaceHolder>(AppointmentId)</PlaceHolder>
+    <Description>AppointmentId</Description>
+ <Source>
+	<DataModel>
+	<Path>Appointment/Id</Path>
+	<TName/>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+  
+<Parameter>
+    <PlaceHolder>(AppointmentDateTime)</PlaceHolder>
+    <Description>Appointment Date Time</Description>
+<Source>
+	<DataModel>
+	  <Path>Appointment/DateTime</Path>
+	  <TName/>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+
+  
+ <Parameter>
+    <PlaceHolder>(DoctorId)</PlaceHolder>
+    <Description>Doctor Identifier</Description>
+ <Source>
+	<DataModel>
+	  <Path>Doctor/Id</Path>
+	  <TName/>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+
+<Parameter>
+    <PlaceHolder>(BranchId)</PlaceHolder>
+    <Description>Branch Identifier</Description>
+ <Source>
+	<DataModel>
+	<Path>Branch/Id</Path>
+	<TName/>
+	</DataModel>
+	<Query/>
+	<Utility/>
+	<APIURL/>
+ </Source>
+</Parameter>
+  
+</ListOfParameters>  
+  
+ 
+	
+<Body>{
+    "Action" : "NewReservation",
+    "Body"  :  {
+        "AppointmentId": "(AppointmentId)",
+        "LocationId": "(BranchId)",
+        "DoctorId": "(DoctorId)",
+        "AppointmentDateTime": "(AppointmentDateTime)",
+        "PatientName": "(PatientName)",
+        "PatientEmails": "(PatientEmails)",
+        "PatientCellNumber": "(PatientMobileNumber)" 
+       }
+}</Body>
+
+<Header>
+<Key/>
+<Value/>
+<Header>
+<Header>
+<Key/>
+<Value/>
+<Header>
+
+<QueryString/>
+
+<ResponseMapping>
+<ListOfConversionItems/>
+</ResponseMapping>
+	
+</OutboundTemplate>

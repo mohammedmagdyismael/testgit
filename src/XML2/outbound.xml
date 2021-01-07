@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OutboundTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<ListOfParameters>
+  
+</ListOfParameters>  
+  
+ 
+	
+<Body>{
+    "Action" : "NewReservation",
+    "Body"  :  {
+        "AppointmentId": "(AppointmentId)",
+        "LocationId": "(BranchId)",
+        "DoctorId": "(DoctorId)",
+        "AppointmentDateTime": "(AppointmentDateTime)",
+        "PatientName": "(PatientName)",
+        "PatientEmails": "(PatientEmails)",
+        "PatientCellNumber": "(PatientMobileNumber)" 
+       }
+}</Body>
+
+<Header>
+<Key/>
+<Value/>
+<Header>
+<Header>
+<Key/>
+<Value/>
+<Header>
+
+<QueryString/>
+
+<ResponseMapping>
+<ListOfConversionItems/>
+</ResponseMapping>
+	
+</OutboundTemplate>

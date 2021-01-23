@@ -1,38 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <OutboundTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-<ListOfParameters>
-  
-</ListOfParameters>  
-  
+  <OutboundBody>
+    <ListOfPlaceHolders>
+      <PlaceHolder>
+        <PlaceHolderName>(AppointmentId)</PlaceHolderName>
+        <Description>Vezeeta Appointment Id</Description>
+        <Source>
+          <ConfigKey>AuthorizationToken</ConfigKey>
+          <DataModel>
+            <Path>ReservationDetailsData.ReservationKey</Path>
+          </DataModel>
+          <Utility>
+            <ListOfUtilParams>
+              <UtilParam>
+                <Name>MobileNumber</Name> 
+                <Source>
+                  <StaticValue>^[s]*(w+)[s]*.*$</StaticValue>
+                  <ConfigKey>LNameRegex</ConfigKey>
+                  <DataModel>
+                    <Path>PatientData.MobileNumber</Path>
+                  </DataModel>
+                </Source>
+              </UtilParam>
+              <UtilParam>
+                <Name>HomeNumber</Name> 
+                <Source>
+                  <StaticValue>ssssssssssssss</StaticValue>
+                  <ConfigKey>Regexxxxxxxx</ConfigKey>
+                  <DataModel>
+                    <Path>PatientData.HomeNumber</Path>
+                  </DataModel>
+                </Source>
+              </UtilParam>
+            </ListOfUtilParams>
+            <UtilName>VConnect.Outbound.TemplateEngine.Classes.OutbonundGenericUtils.FormatMobileNumber</UtilName>
+          </Utility>
+          <DefaultValue>abc</DefaultValue>
+        </Source>
+      </PlaceHolder>
  
-	
-<Body>{
-    "Action" : "NewReservation",
-    "Body"  :  {
-        "AppointmentId": "(AppointmentId)",
-        "LocationId": "(BranchId)",
-        "DoctorId": "(DoctorId)",
-        "AppointmentDateTime": "(AppointmentDateTime)",
-        "PatientName": "(PatientName)",
-        "PatientEmails": "(PatientEmails)",
-        "PatientCellNumber": "(PatientMobileNumber)" 
-       }
-}</Body>
-
-<Header>
-<Key/>
-<Value/>
-<Header>
-<Header>
-<Key/>
-<Value/>
-<Header>
-
-<QueryString/>
-
-<ResponseMapping>
-<ListOfConversionItems/>
-</ResponseMapping>
-	
+    </ListOfPlaceHolders>
+    <Body>
+      {
+      "Action" : "NewReservation",
+      "Body"  :  {
+      "Res": "(AppointmentId)",
+      "DSADF": "(BranchId)",
+      "ASDFA": "(DoctorId)",
+      "AppointmentDateTime": "(AppointmentDate) (AppointmentTime)",
+      "PatientName": "7amada",
+      "PatientMobileNumber": "(PatientMobileNumber)",
+      "MetaData" : (ReservaitonMetaData) 
+      }
+      }
+    </Body>
+  </OutboundBody>
+  <OutboundHeaders>
+    <ListOfPlaceHolders>
+      <PlaceHolder>
+        <PlaceHolderName>Authorization</PlaceHolderName>
+        <Description>Branch Auth Token</Description>
+        <Source>
+          <ConfigKey>AuthorizationToken</ConfigKey>
+        </Source>
+      </PlaceHolder>
+    </ListOfPlaceHolders>
+    <Headers>
+      <Header>
+        <Key>Authorization</Key>
+      </Header>
+    </Headers>
+  </OutboundHeaders>
 </OutboundTemplate>

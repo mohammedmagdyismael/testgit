@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import XML from './XML'
+import XML from './XML2'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<XML />, document.getElementById('root'));

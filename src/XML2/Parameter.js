@@ -28,7 +28,7 @@ class Parameter extends React.Component{
     };
 
     render(){
-        const { selectedParam, newParam, onClickAdd, onFieldChanges } = this.props; 
+        const { selectedParam, newParam, onClickAdd, onFieldChanges, onSave, onAddUtilParamEmpty, onRemoveUtilParamEmpty } = this.props; 
 
         const {
             Description = {}, 
@@ -43,8 +43,6 @@ class Parameter extends React.Component{
             Utility = {}, 
         } = Source ? Source : {};
 
-        console.log(selectedParam)
-
         return(
              <NewParameterContainer>
 
@@ -57,7 +55,7 @@ class Parameter extends React.Component{
                     <FieldHeader>PlaceHolderName</FieldHeader>
                     <InputField 
                         onChange={e=>{selectedParam.setPlaceHolderName(PlaceHolderName.tagName, e.target.value); onFieldChanges(selectedParam)}} 
-                        value={PlaceHolderName && PlaceHolderName.tagInnerContent} />
+                        value={PlaceHolderName && PlaceHolderName.tagInnerContent || ''} />
                 </ParameterNameContainer>
 
                 {/**
@@ -67,7 +65,7 @@ class Parameter extends React.Component{
                     <FieldHeader>Description</FieldHeader>
                     <InputField 
                         onChange={e=>{selectedParam.setDescription(Description.tagName, e.target.value); onFieldChanges(selectedParam)}} 
-                        value={Description && Description.tagInnerContent} />
+                        value={Description && Description.tagInnerContent || ''} />
                 </ParameterNameContainer>
 
                 {/** Source **/}
@@ -80,7 +78,7 @@ class Parameter extends React.Component{
                         <FieldHeader>ConfigKey</FieldHeader>
                         <InputField 
                             onChange={e=>{selectedParam.setSourceConfigKey(ConfigKey.tagName, e.target.value); onFieldChanges(selectedParam)}} 
-                            value={ConfigKey && ConfigKey.tagInnerContent} />
+                            value={ConfigKey && ConfigKey.tagInnerContent || ''} />
                     </ParameterNameContainer>
 
                     {/**
@@ -91,7 +89,7 @@ class Parameter extends React.Component{
                         <FieldHeader>DefaultSource</FieldHeader>
                         <InputField 
                             onChange={e=>{selectedParam.setSourceDefaultSource(DefaultSource.tagName, e.target.value); onFieldChanges(selectedParam)}} 
-                            value={DefaultSource && DefaultSource.tagInnerContent} />
+                            value={DefaultSource && DefaultSource.tagInnerContent || ''} />
                     </ParameterNameContainer>
                     
 
@@ -104,7 +102,7 @@ class Parameter extends React.Component{
                             <FieldHeader>Path</FieldHeader>
                             <InputField 
                                 onChange={e=>{selectedParam.setSourceDataModel(DataModel.Path.tagName, e.target.value); onFieldChanges(selectedParam)}}
-                                value={DataModel && DataModel.Path && DataModel.Path.tagInnerContent} />
+                                value={DataModel && DataModel.Path && DataModel.Path.tagInnerContent || ''} />
                         </ParameterNameContainer>
                     </SubContainer>
 
@@ -117,7 +115,7 @@ class Parameter extends React.Component{
                                 <FieldHeader>UtilName</FieldHeader>
                                 <InputField 
                                     onChange={e=>{selectedParam.setUtilityUtilName(Utility.UtilName.tagName, e.target.value); onFieldChanges(selectedParam)}}
-                                    value={Utility && Utility.UtilName && Utility.UtilName.tagInnerContent}/>
+                                    value={Utility && Utility.UtilName && Utility.UtilName.tagInnerContent || ''}/>
                             </ParameterNameContainer>
 
                             {   Utility.ListOfUtilParams &&
@@ -129,7 +127,7 @@ class Parameter extends React.Component{
                                             <FieldHeader>Name</FieldHeader>
                                             <InputField 
                                                 onChange={e=>{selectedParam.setUtilParamName(uParam.UtilParam.Name.tagName, e.target.value, idx); onFieldChanges(selectedParam)}}
-                                                value={uParam.UtilParam.Name.tagInnerContent } />
+                                                value={uParam.UtilParam.Name.tagInnerContent || ''} />
                                         </ParameterNameContainer>
 
                                         <SubHeader>Source DataModel</SubHeader>
@@ -169,11 +167,13 @@ class Parameter extends React.Component{
                                                 }}
                                                 />
                                         </ParameterNameContainer>
+                                        <AddTagBtn onClick={()=>onRemoveUtilParamEmpty(idx)}>Remove Util Param</AddTagBtn>
+
                                     </UtilContainer>
                                 )})
                             }
                             
-                            <AddTagBtn>Add Util Param</AddTagBtn>
+                            <AddTagBtn onClick={()=>onAddUtilParamEmpty()}>Add Util Param</AddTagBtn>
 
                         </SubContainer>
                     </SubContainer>
@@ -182,9 +182,9 @@ class Parameter extends React.Component{
                  
                 <BtnsContainerWrapper>
                     <BtnsContainer>
-                        {newParam && <AddTagBtn onClick={()=>onClickAdd()}>Add New Placeholder</AddTagBtn>}
-                        {!newParam && <AddTagBtn>Save Placeholder</AddTagBtn>}
-                        {!newParam && <AddTagBtn onClick={()=>this.removePlaceholder()}>Remove Placeholder</AddTagBtn>}
+                         <AddTagBtn onClick={()=>onClickAdd()}>Add New Placeholder</AddTagBtn>
+                        <AddTagBtn onClick={()=>onSave()}>Save Placeholder</AddTagBtn>
+                         <AddTagBtn onClick={()=>this.removePlaceholder()}>Remove Placeholder</AddTagBtn>
                     </BtnsContainer>
                 </BtnsContainerWrapper> 
                 

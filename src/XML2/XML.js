@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Parameter from './Parameter';
 import OutBoundXML from './outbound.xml' ;
-import { templates } from './xmlParamTemplates';
 import { PlaceHolderBuilder } from './PlaceholderBuilder';
 import { 
     Container, 
@@ -48,13 +47,11 @@ class XML extends React.Component{
         var s = new XMLSerializer();
         var newXmlStr = s.serializeToString(xml);
         console.log(newXmlStr); */
-         
-
         console.log(this.paramName.current.value);
     }
 
     addTemplate = () => {
-        const { selectedItem, parameterFieldsList, xml } = this.state;
+        /* const { selectedItem, parameterFieldsList, xml } = this.state;
         let template = this.xmlFileParser(templates[selectedItem]);
         
         Array.from(template.getElementsByTagName("Parameter")).map( (param, idx) => {
@@ -68,7 +65,7 @@ class XML extends React.Component{
         })
         xml.getElementsByTagName("ListOfParameters")[0].appendChild(template.documentElement)
 
-        this.setState({parameterFieldsList, xml});
+        this.setState({parameterFieldsList, xml}); */
     }
 
     componentDidMount(){
@@ -234,11 +231,43 @@ class XML extends React.Component{
         })
     }
 
+    onChangeBody = e => {
+        const bodyValue = e.target.value;
+        this.setState({requestBody: bodyValue});
+    }
+
+    savePlaceholder = () => {
+        const { selectedParam, selectedParamIdx, parameterFieldsList } = this.state;
+        if (selectedParamIdx) {
+            parameterFieldsList[selectedParamIdx] = selectedParam;
+            this.setState({
+                parameterFieldsList,
+            })
+        } else {
+            parameterFieldsList.push(selectedParam);
+            this.setState({
+                parameterFieldsList,
+                selectedParamIdx: parameterFieldsList.length - 1,
+            })
+        }
+        
+    }
+
     onFieldChanges = selectedParam => {
         this.setState({selectedParam});
     }
 
-    onSavePlaceholder = () => {}
+    addUtilParamEmpty = () => {
+        const { selectedParam } = this.state;
+        selectedParam.addEmptyUtilParam();
+        this.setState({selectedParam})
+    }
+
+    removeUtilParamEmpty = idx => {
+        const { selectedParam } = this.state;
+        selectedParam.removeUtilParam(idx);
+        this.setState({selectedParam})
+    }
 
     render(){
         const { selectedParam, requestBody, parameterFieldsList, selectedParamIdx, newParam } = this.state; 
@@ -251,14 +280,17 @@ class XML extends React.Component{
                             selectedParam={selectedParam} 
                             selectedParamIdx={selectedParamIdx} 
                             onClickAdd={this.addNewPlaceholder}
+                            onSave={this.savePlaceholder}
                             onClickRemove={this.removePlaceholder}
                             onFieldChanges={this.onFieldChanges}
+                            onAddUtilParamEmpty={this.addUtilParamEmpty}
+                            onRemoveUtilParamEmpty={this.removeUtilParamEmpty}
                             newParam={newParam}
                             />
                     </XMLCode> 
 
                     <FieldHeader>Request body:</FieldHeader>
-                    <textarea id="requestBody" name="requestBody" rows="14" cols="102" value={requestBody}/> 
+                    <textarea onChange={e=>this.onChangeBody(e)} id="requestBody" name="requestBody" rows="14" cols="102" value={requestBody}/> 
 
                     <Btn onClick={()=>this.print()}>
                         <p>Submit template</p>

@@ -42,6 +42,31 @@ export class PlaceHolderBuilder {
                 
             }
         }
+        this.utilParamEmpty = {
+            UtilParam: {
+                Name: {
+                    tagInnerContent: '',
+                    tagName: ''
+                },
+                Source: {
+                    ConfigKey: {
+                        tagInnerContent: '',
+                        tagName: ''
+                    },
+                    DataModel: {
+                        Path: {
+                            tagInnerContent: '',
+                            tagName: ''
+                        }
+                    },
+                    StaticValue: {
+                        tagInnerContent: '',
+                        tagName: ''
+                    }
+                }
+                
+            }
+        }
         // Source
         this.source = {
             Source: {
@@ -148,6 +173,15 @@ export class PlaceHolderBuilder {
 
     addUtilParam = () => {
         this.source.Source.Utility.ListOfUtilParams.push(JSON.parse(JSON.stringify(this.utilParam)));
+        return this;
+    }
+    addEmptyUtilParam = () => {
+        this.source.Source.Utility.ListOfUtilParams.push(JSON.parse(JSON.stringify(this.utilParamEmpty)));
+        return this;
+    }
+
+    removeUtilParam = idx => {
+        this.source.Source.Utility.ListOfUtilParams.splice(idx, 1);
         return this;
     }
 

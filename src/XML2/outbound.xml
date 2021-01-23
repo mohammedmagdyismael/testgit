@@ -3,42 +3,161 @@
   <OutboundBody>
     <ListOfPlaceHolders>
       <PlaceHolder>
+        <PlaceHolderName>(AuthToken)</PlaceHolderName> 
+        <Source>
+          <ConfigKey>AuthorizationToken</ConfigKey>
+        </Source>
+      </PlaceHolder>
+      <PlaceHolder>
         <PlaceHolderName>(AppointmentId)</PlaceHolderName>
         <Description>Vezeeta Appointment Id</Description>
         <Source>
-          <ConfigKey>AuthorizationToken</ConfigKey>
           <DataModel>
             <Path>ReservationDetailsData.ReservationKey</Path>
           </DataModel>
+        </Source>
+      </PlaceHolder>
+      <PlaceHolder>
+        <PlaceHolderName>(BranchId)</PlaceHolderName>
+        <Description>HIS Branch Id</Description>
+        <Source>
+          <DataModel>
+            <Path>ClinicData.BranchExternalId</Path>
+          </DataModel>
+        </Source>
+      </PlaceHolder>
+      <PlaceHolder>
+        <PlaceHolderName>(DoctorId)</PlaceHolderName>
+        <Description>HIS Branch Id</Description>
+        <Source>
+          <DataModel>
+            <Path>ClinicData.AccountExternalId</Path>
+          </DataModel>
+        </Source>
+      </PlaceHolder>
+      <PlaceHolder>
+        <PlaceHolderName>(PatientMobileNumber)</PlaceHolderName>
+        <Description>Patinet Mobile Number</Description>
+        <Source>
           <Utility>
             <ListOfUtilParams>
               <UtilParam>
                 <Name>MobileNumber</Name> 
                 <Source>
-                  <StaticValue>^[s]*(w+)[s]*.*$</StaticValue>
-                  <ConfigKey>LNameRegex</ConfigKey>
                   <DataModel>
                     <Path>PatientData.MobileNumber</Path>
                   </DataModel>
                 </Source>
               </UtilParam>
               <UtilParam>
-                <Name>HomeNumber</Name> 
+                <Name>CountryCode</Name>
                 <Source>
-                  <StaticValue>ssssssssssssss</StaticValue>
-                  <ConfigKey>Regexxxxxxxx</ConfigKey>
                   <DataModel>
-                    <Path>PatientData.HomeNumber</Path>
+                    <Path>PatientData.PatientCountryCode</Path>
                   </DataModel>
                 </Source>
               </UtilParam>
             </ListOfUtilParams>
             <UtilName>VConnect.Outbound.TemplateEngine.Classes.OutbonundGenericUtils.FormatMobileNumber</UtilName>
           </Utility>
-          <DefaultValue>abc</DefaultValue>
         </Source>
       </PlaceHolder>
- 
+      <PlaceHolder>
+        <PlaceHolderName>(AppointmentTime)</PlaceHolderName>
+        <Description>Appointment Time</Description>
+        <Source>
+          <Utility>
+            <ListOfUtilParams>
+              <UtilParam>
+                <Name>DateTime</Name>
+                <Source>
+                  <DataModel>
+                    <Path>ReservationDetailsData.ReservationDate</Path>
+                  </DataModel>
+                </Source>
+              </UtilParam>
+            </ListOfUtilParams>
+            <UtilName>VConnect.Outbound.TemplateEngine.Classes.OutbonundGenericUtils.FormatTime</UtilName>
+          </Utility>
+        </Source>
+      </PlaceHolder>
+      <PlaceHolder>
+        <PlaceHolderName>(AppointmentDate)</PlaceHolderName>
+        <Description>Appointment Date</Description>
+        <Source>
+          <Utility>
+            <ListOfUtilParams>
+              <UtilParam>
+                <Name>DateTime</Name>
+                <Source>
+                  <DataModel>
+                    <Path>ReservationDetailsData.ReservationDate</Path>
+                  </DataModel>
+                </Source>
+              </UtilParam>
+            </ListOfUtilParams>
+            <UtilName>VConnect.Outbound.TemplateEngine.Classes.OutbonundGenericUtils.FormatDate</UtilName>
+          </Utility>
+        </Source>
+      </PlaceHolder>
+      <PlaceHolder>
+        <PlaceHolderName>(ReservaitonMetaData)</PlaceHolderName>
+        <Source>
+          <DataModel>
+            <Path>MetaData.SlotMetaData</Path>
+          </DataModel>
+          <DefaultValue>{}</DefaultValue>
+        </Source>
+      </PlaceHolder>
+      <PlaceHolder>
+        <PlaceHolderName>(FName)</PlaceHolderName>
+        <Source>
+          <Utility>
+            <ListOfUtilParams>
+              <UtilParam>
+                <Name>SourceValue</Name>
+                <Source>
+                  <DataModel>
+                    <Path>PatientData.PatientName</Path>
+                  </DataModel>
+                </Source>
+              </UtilParam>
+              <UtilParam>
+                <Name>Regex</Name>
+                <Source>
+                  <StaticValue>^[s]*(w+)[s]*.*$</StaticValue>
+                </Source>
+              </UtilParam>
+            </ListOfUtilParams>
+            <UtilName>VConnect.Outbound.TemplateEngine.Classes.OutboundRegexUtils.MatchRegex</UtilName>
+          </Utility>
+        </Source>
+      </PlaceHolder>
+      <PlaceHolder>
+        <PlaceHolderName>(LName)</PlaceHolderName>
+        <Source>
+          <Utility>
+            <ListOfUtilParams>
+              <UtilParam>
+                <Name>SourceValue</Name>
+                <Source>
+                  <DataModel>
+                    <Path>PatientData.PatientName</Path>
+                  </DataModel>
+                </Source>
+              </UtilParam>
+              <UtilParam>
+                <Name>Regex</Name>
+                <Source>
+                  <ConfigKey>LNameRegex</ConfigKey>
+                </Source>
+              </UtilParam>
+            </ListOfUtilParams>
+            <UtilName>VConnect.Outbound.TemplateEngine.Classes.OutboundRegexUtils.MatchRegex</UtilName>
+          </Utility>
+          <DefaultValue>.</DefaultValue>
+        </Source>
+      </PlaceHolder>
     </ListOfPlaceHolders>
     <Body>
       {

@@ -162,7 +162,12 @@ class Parameter extends React.Component{
                                             <InputField value={
                                                 uParam.UtilParam.Source &&
                                                 uParam.UtilParam.Source.ConfigKey &&
-                                                uParam.UtilParam.Source.ConfigKey.tagInnerContent }/>
+                                                uParam.UtilParam.Source.ConfigKey.tagInnerContent }
+                                                onChange={e=>{
+                                                    selectedParam.setUtilParamSourceConfigkey(uParam.UtilParam.Source.ConfigKey.tagName, e.target.value, idx); 
+                                                    onFieldChanges(selectedParam)
+                                                }}
+                                                />
                                         </ParameterNameContainer>
                                     </UtilContainer>
                                 )})

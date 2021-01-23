@@ -86,6 +86,7 @@ class XML extends React.Component{
             });
             listOfPlaceHoldersObjects.forEach((obj, idx) => {
                 let placeholder = new PlaceHolderBuilder();
+                
                 if (obj.PlaceHolder) {
                     if (obj.PlaceHolder.PlaceHolderName) {
                         const { tagName, tagInnerContent } = obj.PlaceHolder.PlaceHolderName;
@@ -114,26 +115,21 @@ class XML extends React.Component{
                         if (Source.Utility) {
                             const { tagName, tagInnerContent} = Source.Utility.UtilName;
                             placeholder.setUtilityUtilName(tagName, tagInnerContent);
-                            
                             if (Source.Utility.ListOfUtilParams && Source.Utility.ListOfUtilParams.length) {
                                 
                                 Source.Utility.ListOfUtilParams.forEach(param => {
- 
                                     if(param.UtilParam && param.UtilParam.Name) {
                                         const { tagName, tagInnerContent} = param.UtilParam.Name;
                                         placeholder.setUtilParamName(tagName, tagInnerContent);
                                     }
-                                    
                                     if(param.UtilParam && param.UtilParam.Source && param.UtilParam.Source.ConfigKey) {
                                         const { tagName, tagInnerContent} =  param.UtilParam.Source.ConfigKey;
                                         placeholder.setUtilParamSourceConfigkey(tagName, tagInnerContent);
                                     }
-
                                     if(param.UtilParam && param.UtilParam.Source && param.UtilParam.Source.StaticValue) {
                                         const { tagName, tagInnerContent} =  param.UtilParam.Source.StaticValue;
                                         placeholder.setUtilParamSourceStaticValue(tagName, tagInnerContent);
                                     }
-
                                     if(param.UtilParam && param.UtilParam.Source && param.UtilParam.Source.DataModel && param.UtilParam.Source.DataModel.Path) {
                                         const { tagName, tagInnerContent} =  param.UtilParam.Source.DataModel.Path;
                                         placeholder.setUtilParamSourceDataModel(tagName, tagInnerContent);

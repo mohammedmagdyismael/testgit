@@ -68,7 +68,6 @@ export class PlaceHolderBuilder {
                 },
             }
         }
-
     }
 
     setPlaceHolderName = (tagName, tagInnerContent) => {
@@ -108,7 +107,7 @@ export class PlaceHolderBuilder {
     }
 
     setUtilParamName = (tagName, tagInnerContent, idx) => {
-        if(idx) {
+        if(idx > -1) {
             this.source.Source.Utility.ListOfUtilParams[idx].UtilParam.Name.tagInnerContent = tagInnerContent;
         } else {
             this.utilParam.UtilParam.Name.tagInnerContent = tagInnerContent;
@@ -118,7 +117,7 @@ export class PlaceHolderBuilder {
     }
 
     setUtilParamSourceStaticValue = (tagName, tagInnerContent, idx) => {
-        if(idx) {
+        if(idx > -1) {
             this.source.Source.Utility.ListOfUtilParams[idx].UtilParam.Source.StaticValue.tagInnerContent = tagInnerContent;
         } else {
             this.utilParam.UtilParam.Source.StaticValue.tagInnerContent = tagInnerContent;
@@ -138,7 +137,7 @@ export class PlaceHolderBuilder {
     }
 
     setUtilParamSourceDataModel = (tagName, tagInnerContent, idx) => {
-        if(idx) {
+        if(idx > -1) {
             this.source.Source.Utility.ListOfUtilParams[idx].UtilParam.Source.DataModel.Path.tagInnerContent = tagInnerContent;
         } else {
             this.utilParam.UtilParam.Source.DataModel.Path.tagInnerContent = tagInnerContent;
@@ -148,7 +147,7 @@ export class PlaceHolderBuilder {
     }
 
     addUtilParam = () => {
-        this.source.Source.Utility.ListOfUtilParams.push(this.utilParam);
+        this.source.Source.Utility.ListOfUtilParams.push(JSON.parse(JSON.stringify(this.utilParam)));
         return this;
     }
 

@@ -84,10 +84,15 @@ export const Btn = styled.div`
 export const AddTagBtn = styled(Btn)`
     margin: 0 0 0 auto;
     padding: 4px 10px;
-    color: #015cac;
-    border: 1px solid #015cac;
-    background-color: #fff;
+    color: ${props => props.disabled ? 'darkgray' : '#015cac'};
+    border: ${props => props.disabled ? '1px solid darkgray' : '#015cac'};;
+    background-color:  #fff;
     border-radius: 3px;
+    &:hover{
+        color: ${props => !props.disabled ? 'darkgray' : '#fff'};
+        border: 1px solid #fff;
+        background-color: #015cac;
+    }
 `;
 
 export const BtnsContainer = styled.div`

@@ -50,6 +50,23 @@ class XML extends React.Component{
         console.log(this.paramName.current.value);
     }
 
+    objectsToXMLConverter = object => {
+        const keys = Object.keys(object);
+        if (keys.every(key => typeof object[key] !== "object")) {
+          if(object.tagInnerContent) {
+            return `${object.tagInnerContent}`;
+          }
+          return;
+        };
+        
+        let nodesList = []
+        keys.forEach((key,idx) => {
+          let innerNodes = this.objectsToXMLConverter(object[key]);
+          if (innerNodes) nodesList.push(`<${Object.keys(object)[idx]}> \n\t ${innerNodes}</${Object.keys(object)[idx]}>   \n`);
+        })
+        return nodesList.join(' ');
+      }
+
     addTemplate = () => {
         /* const { selectedItem, parameterFieldsList, xml } = this.state;
         let template = this.xmlFileParser(templates[selectedItem]);
@@ -76,7 +93,7 @@ class XML extends React.Component{
             let xml = this.xmlFileParser(response.data);
             const outboundBody = xml.getElementsByTagName("OutboundBody")[0];
             const listOfPlaceHolders = outboundBody.getElementsByTagName("ListOfPlaceHolders")[0].getElementsByTagName("PlaceHolder");
- 
+            
             const listOfPlaceHoldersObjects = [];
             Array.from(listOfPlaceHolders).forEach(element => {
                 listOfPlaceHoldersObjects.push(this.xmlToObjectConverter(element))
@@ -142,6 +159,15 @@ class XML extends React.Component{
                  
                 
             })
+            
+            /////////////////////////////Reverse//////////////////////////////////
+            
+            let placeholdersInXMLList = [];
+            listOfPlaceHoldersObjects.forEach(obj => {
+                placeholdersInXMLList.push(this.objectsToXMLConverter(obj.getPlaceHolder()));
+            })
+            console.log(`<ListOfPlaceHolders> \n\t ${placeholdersInXMLList.join('\n\n')}</ListOfPlaceHolders>`);
+                        
             
 
             this.setState({ 
@@ -270,6 +296,12 @@ class XML extends React.Component{
     }
 
     render(){
+
+        /**
+         * Test
+         */
+        
+
         const { selectedParam, requestBody, parameterFieldsList, selectedParamIdx, newParam } = this.state; 
 
         return( 

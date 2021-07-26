@@ -92,7 +92,8 @@ export const HourlyRow = styled.div`
 
 export const Slot = styled.div`
     height: 110px;
-    border: 1px solid;
+    border: 1px solid #fff;
+    background-color: #e7e7e76b;
     cursor: pointer;
     &:hover {
         color: #fff;
@@ -100,6 +101,46 @@ export const Slot = styled.div`
     }
 `;
 
+export const DimmedSlot = styled.div`
+    height: 110px;
+    border: 1px solid #fff;
+    background-color: #e7e7e76b;
+
+`;
+
 export const WeekColumn = styled.div`
     width: 200px;
+`;
+
+export const ButtonsContainer = styled.div`
+    display: flex;
+`;
+export const ButtonContainer = styled.div`
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #dfdfdf;
+    width: 70px;
+    margin: 0px 3px;
+    height: 30px;
+    &>p {
+        margin: 7px 0px;
+        text-align: center;
+    }
+`;
+
+export const AppointmentSlot = styled.div`
+    border: 1px solid #ff0909;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 0px 5px;
+    border-left: 7px solid #ff0909;
+    position: absolute;
+    top: ${props => `${props.slotPosition}px`};
+    width: 90%;
+    height: ${props => props.slotHeight ? `${props.slotHeight}px` : ''};
+    &>p{
+        margin: 0px;
+    }
 `;

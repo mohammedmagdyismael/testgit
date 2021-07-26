@@ -14,8 +14,8 @@ export const MonthsContainer = styled.div`
 
 export const MonthContainer = styled.div`
     width: 196px;
-    height: 270px;
-    margin: 10px 20px;
+    height: 285px;
+    margin: 10px 15px;
     padding: 8px 8px;
     cursor: pointer;
     font-family: sans-serif;

@@ -13,6 +13,7 @@ import {
     ShiftDayContainer,
     ButtonContainer,
     ButtonsContainer,
+    AppointmentSlot,
 } from './ViewMonth.style';
 
 import { daysNames, monthsNames, data } from '../constants';
@@ -46,13 +47,28 @@ const ViewYear = ({ monthIndex, defaultYear }) => {
         const days = [];
         for (let j = 0; j < numberOfDays; j++) {
 
-            const day = (<DayContainer><DayNumber
+            const day = (
+            <DayContainer>
+                <DayNumber
                 hasData={
                     data[defaultYear] &&
                     data[defaultYear][currentMonth] &&
                     data[defaultYear][currentMonth][j + 1] &&
-                    data[defaultYear][currentMonth][j + 1].length > 0}
-            >{j+1}</DayNumber></DayContainer>);
+                    data[defaultYear][currentMonth][j + 1].length > 0
+                }
+                >{j+1}</DayNumber>
+                {
+                    data[defaultYear] &&
+                    data[defaultYear][currentMonth] &&
+                    data[defaultYear][currentMonth][j + 1] &&
+                    data[defaultYear][currentMonth][j + 1].length &&
+                    data[defaultYear][currentMonth][j + 1].map(appointment => 
+                        <AppointmentSlot>
+                            <p>{`${appointment.id}: ${appointment.appointment}`}</p>
+                        </AppointmentSlot>
+                        )
+                }
+            </DayContainer>);
             days.push(day);
         }
 

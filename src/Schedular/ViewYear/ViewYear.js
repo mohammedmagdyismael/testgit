@@ -44,7 +44,6 @@ const ViewYear = ({ onClickMonth }) => {
             const days = [];
             for (let j = 0; j < numberOfDays; j++) {
                 const day = (
-                    
                         <DayNumber hasData={
                             data[defaultYear] &&
                             data[defaultYear][i + 1] &&

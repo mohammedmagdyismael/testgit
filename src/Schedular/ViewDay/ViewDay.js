@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { 
     MonthContainer, 
     MonthRow, 
@@ -15,26 +15,14 @@ import {
     WeekColumn,
 } from './ViewDay.style';
 import { daysNames, monthsNames, daySlots } from '../constants'
-import { getNumberOfDaysInMonth, getShiftLeadingDays, getMonthDays } from './ViewDay.helper';
+import { getNumberOfDaysInMonth, getMonthDays } from './ViewDay.helper';
 
-const ViewYear = () => {
-
-    const [numberOfWeeks, setNumberOfWeeks] = useState(0);
-    const [currentWeekIndex, setCurrentWeekIndex] = useState(0);
-
-    const defaultYear = 2021;
+const ViewYear = ({ monthIndex, defaultYear, day }) => {
     const renderMonths = () => {
         const monthList = [];
-        const monthIndex = 1;
         const numberOfDays = getNumberOfDaysInMonth(defaultYear, monthIndex);
-        const numberOfShiftedDays = getShiftLeadingDays(defaultYear, monthIndex);
         const days = getMonthDays(numberOfDays);
-        const totalShiftsAndDays = [...numberOfShiftedDays, ...days];
-        if (numberOfWeeks === 0) setNumberOfWeeks(Math.ceil(totalShiftsAndDays.length / 7));
-        const weekRow = totalShiftsAndDays.slice((currentWeekIndex)*7, (currentWeekIndex+1)*7)
-
-        const dayIndexInWeek = 3;
-        const dayNumberInMonth = 21;
+        const dayIndexInWeek = new Date(`${defaultYear}-${monthIndex}-${day}`).getDay();
 
         const month = (
             <MonthContainer>
@@ -48,12 +36,12 @@ const ViewYear = () => {
                             )
                         }
                     </div>
-                    <div>
+                    <div style={{ width: '100%'}}>
                         <MonthRow>
                              
                                 <WeekColumn>
                                     <DayName>{daysNames[dayIndexInWeek]}</DayName>
-                                    <DaysContainer>{weekRow[5]}</DaysContainer>
+                                    <DaysContainer>{days[day - 1]}</DaysContainer>
                                     {
                                     daySlots.map(slot =>
                                         <Slot id={slot}>

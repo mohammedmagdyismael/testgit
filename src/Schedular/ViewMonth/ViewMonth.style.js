@@ -67,9 +67,11 @@ export const YearName = styled.p`
 `;
 
 export const DayContainer = styled.div`
-    width: 205px;
+    width: 203px;
     height: 155px;
     cursor: pointer;
+    border: 1px solid #fff;
+    background-color: #e7e7e76b;
     &:hover {
         color: #fff;
         background-color: #0A66C2;
@@ -98,4 +100,16 @@ export const ButtonContainer = styled.div`
         margin: 7px 0px;
         text-align: center;
     }
+`;
+
+export const AppointmentSlot = styled.div`
+    border: 1px solid #ff0909;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 0px 5px;
+    border-left: 7px solid #ff0909;
+    &>p{
+        margin: 0px;
+    }
+
 `;

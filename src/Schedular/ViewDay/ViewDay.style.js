@@ -92,7 +92,8 @@ export const HourlyRow = styled.div`
 
 export const Slot = styled.div`
     height: 110px;
-    border: 1px solid;
+    border: 1px solid #fff;
+    background-color: #e7e7e76b;
     cursor: pointer;
     &:hover {
         color: #fff;
@@ -101,5 +102,5 @@ export const Slot = styled.div`
 `;
 
 export const WeekColumn = styled.div`
-    width: 200px;
+    width: 100%;
 `;

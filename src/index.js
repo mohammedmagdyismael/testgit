@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Schedular from './Schedular'
+import Schedular from './Calendar'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Schedular />, document.getElementById('root'));

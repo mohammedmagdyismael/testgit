@@ -1,0 +1,125 @@
+@import '../shared/Colors.scss';
+@import '../shared/Mixins.scss';
+@import '../shared/FontSizes.scss';
+@import '../shared/Variables.scss';
+
+.drop-down--container {
+  position: relative;
+  width: max-content;
+
+  .view--container {
+    @include center-vertical;
+
+    min-height: 40px;
+    width: max-content;
+
+    &:not(.view--container__disabled) {
+      cursor: pointer;
+
+      div,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      span,
+      label,
+      p {
+        cursor: pointer;
+      }
+    }
+
+    .icon--container {
+      margin-left: $spacing-1;
+      transition: transform 200ms ease-in-out;
+
+      &.icon--container__up {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+
+  .menu--container {
+    @include border-radius(4px);
+    @include box-shadow(0 2px 2px rgba($medium-grey, 0.3));
+
+    align-items: flex-start;
+    background-color: #fff;
+    border: 1px solid rgba($medium-grey, 0.3);
+    display: none;
+    flex-flow: column;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    outline: 0;
+    overflow-y: auto;
+    padding: $spacing-1 0;
+    position: absolute;
+    right: 0;
+    width: max-content;
+    z-index: 10;
+
+    &.menu--container__left {
+      left: 0;
+      right: auto;
+    }
+
+    &.menu--container__open {
+      display: block;
+    }
+
+    hr {
+      margin: $spacing-1 0;
+    }
+
+    .item {
+      padding: $spacing-2 $spacing-4;
+      width: unset;
+
+      .icon--container {
+        height: 100%;
+        width: 100%;
+      }
+
+      .item--text {
+        font-weight: 500;
+        max-width: 200px;
+      }
+
+      &.item--highlighted {
+        &>.item--text {
+          color: #0070cd;
+        }
+        &>.icon--container > svg > g > path {
+          fill: #0070cd;
+        }
+      }
+
+      &.item--grid {
+        @include display-grid;
+
+        align-items: center;
+        grid-column-gap: $spacing-2;
+        grid-template-columns: 25px auto;
+      }
+
+      &:not(.item--not-clickable):not(.item--disabled) {
+        cursor: pointer;
+
+        .item--text {
+          cursor: pointer;
+        }
+
+        &:hover {
+          background-color: rgba($vezeeta-blue, 0.05);
+        }
+      }
+
+      &.item--disabled {
+        opacity: .6;
+      }
+    }
+  }
+}

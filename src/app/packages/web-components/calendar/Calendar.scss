@@ -1,0 +1,289 @@
+@import '../shared/Colors.scss';
+@import '../shared/Mixins.scss';
+@import '../shared/Variables.scss';
+@import '../shared/FontSizes.scss';
+
+$calendar-width: 254px;
+$calendar-height: 307px;
+$calendar-header-height: 36px;
+$calendar-day-width: 34px;
+$calendar-day-height: 34px;
+$calendar-day-radius: 50%;
+$calendar-body-bg-color: #f6fbff;
+$calendar-light-color: #ffffff;
+
+@mixin today-dot($color: $vezeeta-blue) {
+  &::after {
+    @include border-radius(50%);
+    @include transform(translateX(-50%));
+
+    background-color: $color;
+    bottom: 4px;
+    content: '';
+    display: block;
+    height: 4px;
+    left: 50%;
+    position: absolute;
+    width: 4px;
+  }
+}
+
+@mixin day-circle() {
+  position: relative;
+
+  &::before {
+    @include border-radius($calendar-day-radius);
+
+    border: 2px solid #fff;
+    content: '';
+    height: $calendar-day-height;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: $calendar-day-width;
+  }
+}
+
+.calendar-wrapper {
+  background-color: $calendar-light-color;
+  border: 1px solid $medium-grey;
+  border-radius: 4px;
+  display: block;
+  height: $calendar-height;
+  margin: 0 auto;
+  max-width: $calendar-width;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.calendar-header {
+  @include center-vertical;
+
+  color: $vezeeta-blue;
+  height: $calendar-header-height;
+  justify-content: space-between;
+  padding: 0 $spacing-4;
+  width: $calendar-width - 1;
+}
+
+.calendar-header-title {
+  @include center-vertical;
+
+  color: $vezeeta-blue;
+  font-weight: 600;
+}
+
+.calendar-header-title-month,
+.calendar-header-title-year {
+  color: $vezeeta-blue;
+  cursor: default;
+  font-size: $subheading-en;
+  font-weight: 500;
+  margin: 0;
+}
+
+.calendar-header-title-year-input {
+  .input-container {
+    border-bottom: 0 !important;
+    min-width: 60px;
+    
+    input {
+      color: $vezeeta-blue;
+      font-size: $subheading-en;
+      margin-right: 0;
+      text-align: center;
+      width: 44px;
+    }
+  }
+}
+
+
+.year--danger {
+  color: $vezeeta-red;
+}
+
+.calendar-arrow,
+.calendar-arrow {
+  @include center;
+
+  cursor: pointer;
+
+  &.calendar-arrow--disable {
+    pointer-events: none;
+  }
+}
+
+.calendar-arrow--rotated {
+  // .calendar-arrow {
+    transform: rotate(180deg);
+  // }
+}
+
+.calendar-body {
+  background-color: $calendar-body-bg-color;
+  display: block;
+  font-weight: 500;
+  height: $calendar-height - $calendar-header-height;
+  padding: $spacing-2;
+  width: $calendar-width;
+}
+
+.calendar-weekday,
+.calendar-day {
+  @include center;
+
+  color: $default-grey;
+  cursor: default;
+  float: left;
+  font-size: $body-en;
+  height: $calendar-day-height;
+  line-height: $calendar-day-height;
+  margin-bottom: 1px;
+  margin-top: 1px;
+  text-transform: uppercase;
+  width: $calendar-day-width;
+
+}
+
+.calendar-day:not(.calendar-start-date):not(.calendar-end-date):not(.calendar-one-date):not(.calendar-diapason-date):not(.calendar-today) {
+  cursor: pointer;
+
+  &:hover {
+    background-color: $medium-grey;
+    border-radius: 50%;
+  }
+}
+
+.calendar-start-date,
+.calendar-one-date,
+.calendar-end-date,
+.calendar-diapason-date,
+.calendar-start-date-arabic,
+.calendar-end-date-arabic
+{
+  background-color: $vezeeta-blue;
+  color: #fff !important;
+}
+
+.calendar-start-date {
+  @include day-circle;
+
+  border-bottom-left-radius: $calendar-day-radius;
+  border-top-left-radius: $calendar-day-radius;
+  color:white !important;
+}
+.calendar-start-date-arabic {
+  @include day-circle;
+  background-color: $vezeeta-blue !important;
+  border-bottom-right-radius: $calendar-day-radius !important;
+  border-top-right-radius: $calendar-day-radius !important;
+  border-bottom-left-radius: unset !important;
+  border-top-left-radius: unset !important;
+  color:white !important;
+}
+
+.calendar-end-date {
+  @include day-circle;
+  
+  border-bottom-right-radius: $calendar-day-radius;
+  border-top-right-radius: $calendar-day-radius;
+  color:white !important;
+}
+.calendar-end-date-arabic {
+  @include day-circle;
+  background: $vezeeta-blue !important;
+  border-bottom-left-radius: $calendar-day-radius !important;
+  border-top-left-radius: $calendar-day-radius !important;
+  border-bottom-right-radius: unset !important;
+  border-top-right-radius: unset !important;
+  color:white !important;
+}
+
+.calendar-one-date {
+  border-radius: $calendar-day-radius;
+  // color:white !important;
+}
+
+.calendar-opacity-50 {
+  opacity: 0.5;
+}
+
+.calendar-today {
+  @include today-dot(#fff);
+  position: relative;
+
+  &:not(.calendar-start-date):not(.calendar-end-date):not(.calendar-one-date):not(.calendar-diapason-date):not(.calendar-start-date-arabic):not(.calendar-end-date-arabic) {
+    @include today-dot;
+    @include border-radius(50%);
+
+    background-color: $medium-grey;
+    color: $vezeeta-blue;
+    position: abso;
+  }
+}
+
+@mixin calendar-error-popup {
+  @include border-radius(4px);
+  @include transform(translateX(-50%));
+
+  background-color: $vezeeta-red;
+  bottom: $spacing-4;
+  color: #fff;
+  cursor: default;
+  font-weight: 400;
+  left: 50%;
+  max-width: $calendar-width - 20px;
+  min-width: 200;
+  overflow: hidden;
+  padding: $spacing-2 $spacing-4;
+  position: absolute;
+  text-align: center;
+  width: 180px;
+  z-index: 100;
+}
+
+.calendar-error-popup-hide {
+  @include calendar-error-popup;
+
+  display: none;
+}
+
+.calendar-error-popup-show {
+  @include calendar-error-popup;
+
+  display: block;
+}
+
+.calendar-weekday-arabic {
+  font-size: 10px !important;
+  transform: none !important;
+}
+
+.calendar-days-arabic {
+  transform: rotateY(180deg)
+}
+.calendar-day-arabic {
+  @include center;
+
+  color: $default-grey;
+  cursor: default;
+  float: left;
+  font-size: $body-en;
+  height: $calendar-day-height;
+  line-height: $calendar-day-height;
+  margin-bottom: 1px;
+  margin-top: 1px;
+  text-transform: uppercase;
+  width: $calendar-day-width;
+  transform: rotateY(180deg)
+
+}
+.calendar-day-arabic:not(.calendar-start-date-arabic):not(.calendar-end-date-arabic):not(.calendar-one-date):not(.calendar-diapason-date):not(.calendar-today) {
+  cursor: pointer;
+
+  &:hover {
+    background-color: $medium-grey;
+    border-radius: 50%;
+  }
+}

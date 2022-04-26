@@ -1,0 +1,7 @@
+scripts/
+config/
+<<<<<<< HEAD
+/src/app/modules/components
+=======
+app/modules/components/*
+>>>>>>> d1682f51c7110e3e4ee22fe83b200eba42b5b474

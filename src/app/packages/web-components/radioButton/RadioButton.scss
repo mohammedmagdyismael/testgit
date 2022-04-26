@@ -1,0 +1,109 @@
+@import '../shared/Colors.scss';
+@import '../shared/Mixins.scss';
+@import '../shared/Variables.scss';
+
+.radio-button-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &.flex-row {
+    height: 30px;
+
+    .lazy-loading {
+      @include center-vertical;
+
+      div {
+        margin-right: $spacing-2;
+      }
+    }
+  }
+
+  &.flex-col {
+    .lazy-loading {
+      @include center-horizontal;
+
+      div {
+        margin-bottom: $spacing-2;
+
+        .text {
+          width: 120px;
+        }
+      }
+    }
+
+    li {
+      margin-bottom: $spacing-3;
+
+      // &:last-child {
+      //   margin: 0;
+      // }
+    }
+  }
+
+  li {
+    @include center-vertical;
+
+    color: $default-grey;
+    font-weight: 500;
+    position: relative;
+
+    input {
+      &[type='radio'] {
+        display: none;
+        visibility: hidden;
+
+        &:checked ~  {
+          .check {
+            border: 1.5px solid $vezeeta-blue;
+
+            .inside {
+              background: $vezeeta-blue;
+            }
+          }
+        }
+      }
+    }
+
+    label {
+      @include center-vertical;
+
+      cursor: pointer;
+      padding: 0 $spacing-5 0 $spacing-3;
+
+      svg {
+        margin-right: $spacing-4;
+      }
+    }
+
+    .check {
+      @include border-radius(100%);
+      @include center;
+
+      border: 1.5px solid $helper-grey;
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+
+      .inside {
+        @include border-radius(50%);
+
+        height: 7px;
+        width: 7px;
+      }
+    }
+  }
+
+  .option--disabled {
+    opacity: 0.5;
+
+    label {
+      cursor: default;
+    }
+  }
+}
+
+.radio-button-list--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

@@ -1,0 +1,29 @@
+@import '../shared/Mixins.scss';
+@import '../shared/Colors.scss';
+
+div {
+  &.country-item,
+  &.country-item-value {
+    @include center-vertical;
+
+    width: 100%;
+
+    .flag {
+      border-radius: 50%;
+      min-height: 14px;
+      max-height: 14px;
+      margin-right: 10px;
+      min-width: 14px;
+      max-width: 14px;
+    }
+
+    .name {
+      color: $default-grey;
+      cursor: pointer !important;
+      font-weight: 500;
+      overflow: hidden;
+      text-decoration: none;
+      width: 100%;
+    }
+  }
+}

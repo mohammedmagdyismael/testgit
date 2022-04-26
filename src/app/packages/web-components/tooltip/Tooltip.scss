@@ -1,0 +1,84 @@
+@import '../shared/Colors.scss';
+@import '../shared/Mixins.scss';
+@import '../shared/Variables.scss';
+
+@mixin arrow {
+  border-style: solid;
+  border-width: 5px;
+  content: '';
+  position: absolute;
+}
+
+.tooltip {
+  display: inline-block;
+  position: relative;
+
+  &.tooltip--show {
+    .tooltip--message {
+      visibility: visible;
+    }
+  }
+
+  .tooltip--message {
+    @include border-radius(4px);
+    @include transform(translateX(-50%));
+
+    background-color: $default-grey;
+    color: #fff;
+    left: 50%;
+    line-height: 15px;
+    max-width: 180px;
+    min-width: 120px;
+    padding: $spacing-3;
+    position: absolute;
+    text-align: center;
+    top: 110%;
+    visibility: hidden;
+    width: max-content;
+    z-index: 10;
+  }
+
+  .arrow--bottom {
+    &::after {
+      @include arrow;
+
+      border-color: $default-grey transparent transparent transparent;
+      left: 50%;
+      margin-left: -5px;
+      top: 100%;
+    }
+  }
+
+  .arrow--top {
+    &::after {
+      @include arrow;
+
+      border-color: transparent transparent $default-grey transparent;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+    }
+  }
+
+  .arrow--left {
+    &::after {
+      @include arrow;
+
+      border-color: transparent $default-grey transparent transparent;
+      margin-top: -5px;
+      right: 100%;
+      top: 50%;
+    }
+  }
+
+  .arrow--right {
+    &::after {
+      @include arrow;
+
+      border-color: transparent transparent transparent $default-grey;
+      left: 100%;
+      margin-top: -5px;
+      top: 50%;
+    }
+  }
+}

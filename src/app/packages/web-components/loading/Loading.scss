@@ -1,0 +1,11 @@
+@import '../shared/Mixins.scss';
+
+.global-loading {
+  @include center;
+
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

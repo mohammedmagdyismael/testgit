@@ -1,0 +1,241 @@
+@import '../../shared/Colors.scss';
+@import '../../shared/Mixins.scss';
+@import '../../shared/Variables.scss';
+
+.hide {
+  display: none;
+}
+
+.largerCropContainer{
+  width: 45% !important;
+  height: 78% !important;
+}
+
+.image_guide_style{
+height: 289px !important;
+width: 514px !important;
+}
+
+$track-color: $medium-grey;
+$thumb-color: $vezeeta-blue;
+
+$thumb-radius: 100%;
+$thumb-height: 10px;
+$thumb-width: 10px;
+$thumb-shadow-size: 1px;
+$thumb-shadow-blur: 1px;
+$thumb-shadow-color: $vezeeta-blue;
+$thumb-border-width: 1px;
+$thumb-border-color: $vezeeta-blue;
+
+$track-width: 100%;
+$track-height: 3px;
+$track-shadow-size: 0px;
+$track-shadow-blur: 0px;
+$track-shadow-color: $medium-grey;
+$track-border-width: 1px;
+$track-border-color: none;
+
+$track-radius: 5px;
+$contrast: 5%;
+
+input {
+  &[type='range'] {
+    direction: ltr;
+    -webkit-appearance: none;
+    margin: $thumb-height / 2 0;
+    width: $track-width;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-slider-runnable-track {
+      @include horizontal-linear-gradient(right, left, $medium-grey, 50, $vezeeta-blue, 50);
+      @include track($track-width, $track-height);
+      @include box-shadow($track-shadow-size $track-shadow-size $track-shadow-blur $track-shadow-color 0 0 $track-shadow-size lighten($track-shadow-color, 5%));
+
+      border: $track-border-width solid $track-border-color;
+      border-radius: $track-radius;
+    }
+
+    &::-webkit-slider-thumb {
+      @include thumb($thumb-border-width, $thumb-border-color, $thumb-height, $thumb-width, $thumb-radius, $thumb-color);
+
+      -webkit-appearance: none;
+      margin-top: (($track-height) / 2) - ($thumb-height / 2) - 0.5;
+    }
+
+    &:focus::-webkit-slider-runnable-track {
+      @include horizontal-linear-gradient(right, left, $medium-grey, 50, $vezeeta-blue, 50);
+    }
+
+    &::-moz-range-track {
+      @include horizontal-linear-gradient(right, left, $medium-grey, 50, $vezeeta-blue, 50);
+      @include track($track-width, $track-height);
+      @include box-shadow($track-shadow-size $track-shadow-size $track-shadow-blur $track-shadow-color 0 0 $track-shadow-size lighten($track-shadow-color, 5%));
+
+      border: $track-border-width solid $track-border-color;
+      border-radius: $track-radius;
+    }
+
+    &::-moz-range-thumb {
+      @include thumb($thumb-border-width, $thumb-border-color, $thumb-height, $thumb-width, $thumb-radius, $thumb-color);
+    }
+
+    &::-ms-track {
+      @include horizontal-linear-gradient(right, left, $medium-grey, 50, $vezeeta-blue, 50);
+      @include track($track-width, $track-height);
+
+      background: transparent;
+      border-color: transparent;
+      border-width: $thumb-width 0;
+      color: transparent;
+    }
+
+    &::-ms-fill-lower {
+      @include box-shadow($track-shadow-size $track-shadow-size $track-shadow-blur $track-shadow-color 0 0 $track-shadow-size lighten($track-shadow-color, 5%));
+
+      background: darken($track-color, $contrast);
+      border: $track-border-width solid $track-border-color;
+      border-radius: $track-radius * 2;
+    }
+
+    &::-ms-fill-upper {
+      @include box-shadow($track-shadow-size $track-shadow-size $track-shadow-blur $track-shadow-color 0 0 $track-shadow-size lighten($track-shadow-color, 5%));
+
+      background: $track-color;
+      border: $track-border-width solid $track-border-color;
+      border-radius: $track-radius * 2;
+    }
+
+    &::-ms-thumb {
+      @include thumb($thumb-border-width, $thumb-border-color, $thumb-height, $thumb-width, $thumb-radius, $thumb-color);
+    }
+
+    &:focus {
+      &::-ms-fill-lower {
+        background: $track-color;
+      }
+    }
+
+    &:focus {
+      &::-ms-fill-upper {
+        background: lighten($track-color, $contrast);
+      }
+    }
+  }
+}
+
+.crop-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+
+  .crop-image-tool-container {
+    @include transform(translate(-50%, -50%));
+    @include border-radius(2px);
+
+    background-color: white;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+
+    input {
+      &[type='file'] {
+        display: none;
+      }
+    }
+
+    .header {
+      @include center-vertical;
+
+      justify-content: space-between;
+      padding: 11px 10px;
+
+      .back-btn,
+      .close-btn {
+        @include center;
+        @include box-shadow(none);
+
+        background-color: transparent;
+        border: 0;
+        height: 24px;
+        outline: none;
+        width: 24px;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.07);
+        }
+      }
+
+      .title {
+        color: $default-grey;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 10px;
+      }
+    }
+
+    .crop-area-container {
+      position: relative;
+
+      #image-guide-lines {
+        @include border-radius(50%);
+
+        height: 200px;
+        left: 50px;
+        pointer-events: none;
+        position: absolute;
+        top: 50px;
+        width: 200px;
+      }
+    }
+
+    .zoom-range-container {
+      @include center-vertical;
+
+      padding: 6px $spacing-4 $spacing-2;
+
+      .zoom-label {
+        font-size: 13px;
+        font-weight: 500;
+        margin-right: $spacing-4;
+      }
+    }
+
+    .btns-container {
+      @include center;
+
+      justify-content: space-around;
+      padding: 0 10px $spacing-4;
+
+      .button-container {
+        margin: 0;
+
+        &:first-child {
+          margin-right: $spacing-2;
+        }
+
+        &:last-child {
+          margin-left: $spacing-2;
+        }
+
+        .text-container {
+          min-width: 126px;
+        }
+
+        button {
+          &.btn {
+            min-width: 126px;
+          }
+        }
+      }
+    }
+  }
+}

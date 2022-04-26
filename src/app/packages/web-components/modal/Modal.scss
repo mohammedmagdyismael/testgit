@@ -1,0 +1,78 @@
+@import '../shared/Mixins.scss';
+@import '../shared/Colors.scss';
+@import '../shared/Variables.scss';
+
+$header-height: 48px;
+$close-btn-radius: 26px;
+$padding: $spacing-5;
+
+
+    .modal-tabs {
+      display: flex;
+      flex-direction: row;
+
+      .tab-container,
+      .tab-container--static {
+        border-bottom: 2px solid transparent;
+        height: $header-height - 2;
+        outline: none;
+        padding: 0 $spacing-5;
+
+        .tab {
+          font-weight: 500;
+          line-height: 46px;
+          margin: 0;
+        }
+      }
+
+      .tab-container {
+        cursor: pointer;
+
+        &:hover {
+          .tab {
+            color: $vezeeta-blue;
+          }
+        }
+
+        &.tab--active {
+          border-bottom: 2px solid $vezeeta-blue;
+
+          .tab {
+            color: $vezeeta-blue;
+          }
+        }
+      }
+    }
+
+    .modal-close_btn {
+      @include border-radius(4px);
+      @include center;
+
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      height: $close-btn-radius;
+      outline: none;
+      overflow: hidden;
+      padding: 0;
+      width: $close-btn-radius;
+
+      .close-icon {
+        margin-top: 1px;
+      }
+
+      &:hover {
+        background-color: rgba($color: (#000), $alpha: 0.1);
+      }
+    }
+
+  .modal-content-container {
+    .modal-content {
+      display: none;
+      padding: $padding;
+
+      &.modal-content--show {
+        display: block;
+      }
+    }
+  }

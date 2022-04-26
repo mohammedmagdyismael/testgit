@@ -1,0 +1,45 @@
+@import '../shared/Colors.scss';
+@import '../shared/Variables.scss';
+@import '../shared/Mixins.scss';
+
+.checkbox-container {
+  @include center-vertical;
+}
+
+.checkbox {
+  @include border-radius(2px);
+
+  background-color: #fff;
+  border: 2px solid rgba($helper-grey, 0.6);
+  cursor: pointer;
+  height: 15px;
+  position: relative;
+  vertical-align: middle;
+  width: 15px;
+}
+
+.checkbox-checked {
+  background-color: $vezeeta-blue;
+  border: 2px solid $vezeeta-blue;
+}
+
+.checkbox-checked::after {
+  @include transform(rotate(45deg));
+
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  content: '';
+  display: block;
+  height: 10px;
+  left: 3px;
+  position: absolute;
+  top: 0;
+  width: 5px;
+}
+
+.checkbox-label {
+  cursor: pointer;
+  font-weight: 500;
+  line-height: initial;
+  padding-left: $spacing-3;
+}

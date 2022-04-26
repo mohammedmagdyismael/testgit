@@ -1,0 +1,33 @@
+@import '../shared/Variables.scss';
+
+.checkbox-list-container {
+  &.checkbox-list--row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .checkbox-container {
+      margin-right: $spacing-3;
+
+      &:last-child {
+        margin-bottom: $spacing-3;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .checkbox-container {
+    margin-bottom: $spacing-3;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.checkbox-list--arabic {
+  span {
+    .checkbox {
+      margin-left: $spacing-3 !important;
+    }
+  }
+}

@@ -1,0 +1,268 @@
+@import '../shared/FontSizes.scss';
+@import '../shared/Mixins.scss';
+@import '../shared/Colors.scss';
+@import '../shared/Variables.scss';
+
+.select {
+  position: relative;
+
+  .placeholder-img {
+    background-color: $medium-grey;
+    border-radius: 50%;
+    height: 14px;
+    margin-right: 10px;
+    width: 14px;
+  }
+
+  .select-icon {
+    margin-right: 11px;
+  }
+
+  .input-container {
+    @include center-vertical;
+
+    border-bottom: 1px solid $default-grey;
+    cursor: pointer;
+    min-height: 34px;
+    max-height: max-content;
+    justify-content: flex-start;
+    min-width: 96px;
+    outline: 0;
+    padding: 7px 2px 6px 0;
+    transform: rotate(0);
+
+    &.input-container--multiple {
+      min-height: 42px;
+    }
+
+    input {
+      @include placeholder(rgba($default-grey, 0.5));
+      @include desktop {
+        font-size: $body-en;
+
+        &:lang(ar) {
+          font-size: $body-ar;
+        }
+      }
+
+      @include mobile {
+        font-size: $body-en--mobile;
+
+        &:lang(ar) {
+          font-size: $body-ar--mobile;
+        }
+      }
+
+      background-color: transparent;
+      border: 0;
+      color: $default-grey;
+      cursor: pointer;
+      font-weight: 500;
+      margin-right: 24px;
+      outline: 0;
+      white-space: nowrap;
+      width: calc(100% - 45px);
+    }
+  }
+
+  .error-message {
+    color: $vezeeta-red;
+    display: block;
+    font-size: $caption-en;
+    font-weight: 500;
+    height: 17px;
+    opacity: 0;
+    position: absolute;
+
+    &:lang(ar) {
+      font-size: $caption-ar;
+    }
+  }
+
+  &.select--focused {
+    .input-container {
+      border-bottom: 1px solid $vezeeta-blue;
+    }
+  }
+
+  &.select--danger {
+    .input-container {
+      border-bottom-color: $vezeeta-red;
+    }
+
+    .error-message {
+      opacity: 1;
+    }
+  }
+
+  &.select--no-icon {
+    .placeholder-img,
+    .select-icon {
+      display: none;
+    }
+  }
+
+  &.select--disabled {
+    opacity: 0.5;
+
+    .input-container {
+      cursor: default;
+
+      input {
+        cursor: default;
+      }
+    }
+  }
+
+  &.select--no_borders {
+    .input-container {
+      border-bottom: none;
+    }
+
+    .menu {
+      @include border-radius($spacing-1);
+
+      border-top: 1px solid rgba($medium-grey, 0.4);
+    }
+  }
+
+  .menu {
+    @include border-radius(0 0 $spacing-1 $spacing-1);
+    @include box-shadow(0 2px 2px rgba($medium-grey, 0.4));
+
+    align-items: flex-start;
+    background-color: #fff;
+    border: 1px solid rgba($medium-grey, 0.4);
+    border-top: none;
+    display: none;
+    flex-flow: column;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+    min-width: 140px;
+    outline: 0;
+    overflow-y: hidden;
+    padding: 0;
+    position: absolute;
+
+    &.menu--open {
+      display: block;
+    }
+
+    .items--container {
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    li {
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-weight: 500;
+      padding: $spacing-2 $spacing-4;
+      width: unset;
+
+      &.selected {
+        background-color: rgba($vezeeta-blue, 0.1);
+
+        div,
+        label,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span {
+          color: $vezeeta-blue;
+        }
+
+        svg {
+          path {
+            color: $vezeeta-blue;
+          }
+        }
+      }
+
+      div,
+      label,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      span,
+      img {
+        cursor: pointer;
+      }
+
+      &.focused:not(.selected) {
+        background-color: rgba($vezeeta-blue, 0.05);
+      }
+
+      &.disabled {
+        cursor: default;
+        opacity: 0.75;
+
+        div,
+        label,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span,
+        img {
+          cursor: default;
+        }
+
+        &:hover {
+          background-color: #fff;
+        }
+      }
+
+      &.headline {
+        padding: 6px $spacing-4;
+        margin: 0;
+        background-color: $light-grey;
+        cursor: default !important;
+        align-items: center;
+        display: flex;
+
+        label {
+          font-size: 12px !important;
+        }
+
+        div,
+        label,
+        img {
+          cursor: default !important;
+        }
+
+        &:hover {
+          background-color: $light-grey;
+        }
+      }
+    }
+  }
+
+  .custom-option--container {
+    @include center-vertical;
+
+    .custom-option--text,
+    span {
+      color: $vezeeta-blue;
+      font-weight: 500;
+    }
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+}

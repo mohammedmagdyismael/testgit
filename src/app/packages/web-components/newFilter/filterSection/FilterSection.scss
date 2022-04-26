@@ -1,0 +1,80 @@
+@import '../../shared/Colors.scss';
+@import '../../shared/Variables.scss';
+@import '../../shared/FontSizes.scss';
+@import '../../shared/Mixins.scss';
+
+.filter-section {
+  padding: $spacing-5;
+
+  &:last-child {
+    @include border-radius(0 0 5px 5px);
+  }
+
+  .select {
+    margin-top: $spacing-1;
+    width: 100%;
+
+    .menu {
+      li {
+        padding: $spacing-2 $spacing-2 $spacing-2 $spacing-6;
+      }
+    }
+  }
+
+  .filter-section-title {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .filter-placeholder {
+    color: $default-grey;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .checkbox label {
+    color: $vezeeta-blue;
+  }
+
+  .icon-container {
+    @include center;
+
+    position: relative;
+    right: -1px;
+    transition: transform 200ms ease-in-out;
+
+    &.icon--down {
+      transform: rotate(0);
+    }
+
+    &.icon--up {
+      transform: rotate(180deg);
+    }
+
+    svg {
+      margin-right: 0;
+    }
+  }
+
+  .checkbox-list-container {
+    margin-top: $spacing-4;
+
+    .checkbox-label {
+      padding-left: $spacing-3;
+    }
+  }
+
+  .radio-button-list {
+    margin-top: $spacing-4;
+
+    label {
+      padding: 0 0 0 $spacing-3;
+    }
+  }
+}

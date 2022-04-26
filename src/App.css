@@ -1,0 +1,13 @@
+body {
+    background-image:url('app/assets/bkgrnd.jpg');
+    background-color: #cccccc;
+    font-family: system-ui !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+}
+
+html {
+    position: relative;
+}

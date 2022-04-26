@@ -1,0 +1,137 @@
+/* eslint-disable react/forbid-prop-types */
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Icon from '../icon/Icon';
+import IconsStore from './IconsStore';
+import {
+  FieldContainer,
+  FieldLabel,
+  SearchInput,
+  FieldTag,
+  ValueTagContainer,
+  DisableOverLay,
+  IsRequiredNote,
+} from './Paragraph.style';
+
+const Paragraph = ({ ...props }) => {
+  const {
+    fieldLabel,
+    componentName,
+    fieldValue,
+    fieldTag,
+    extendDropDownStyle,
+    icon,
+    iconSize,
+    onChange,
+    validation,
+    isDisabled,
+    isRequired,
+    range,
+    isValid,
+    isPassword,
+    placeHolder,
+  } = props;
+  const [value, setValue] = useState(fieldValue);
+  const [isFocued, setFocus] = useState(true);
+
+  useEffect(
+    () => {
+      if (onChange) onChange(value);
+    },
+    [value],
+  );
+  useEffect(
+    () => {
+      if (fieldValue) setValue(fieldValue);
+      else setValue('');
+    },
+    [fieldValue],
+  );
+
+  const onChangeAndValidation = inputedValue => {
+    let isValidInput = true;
+    if (validation && validation.length) {
+      validation.forEach(check => {
+        isValidInput = isValidInput && check.regex.test(inputedValue);
+      });
+    }
+    if (range && range.length) {
+      isValidInput = isValidInput && !(Number(inputedValue) < 0 || Number(inputedValue) > 100);
+    }
+    if (isValidInput || !inputedValue) {
+      setValue(inputedValue);
+    }
+  };
+
+  const getFocusOnInputField = () => {
+    setFocus(true);
+    if (document.getElementById(`input-container-${componentName}`)) {
+      document.getElementById(`input-container-${componentName}`).focus();
+    }
+  };
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <DisableOverLay extendDropDownStyle={extendDropDownStyle} isDisabled={isDisabled} />
+      <FieldContainer
+        extendDropDownStyle={extendDropDownStyle}
+        className={`input-${componentName}`}
+        onClick={() => getFocusOnInputField()}
+        isValid={isValid}
+      >
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
+          {fieldLabel && (
+            <FieldLabel isFocused={isFocued}>
+              {fieldLabel}
+              {isRequired && <IsRequiredNote>*</IsRequiredNote>}
+            </FieldLabel>
+          )}
+          {isFocued && (
+            <ValueTagContainer>
+              <FieldTag>{fieldTag}</FieldTag>
+              {isFocued && (
+                <SearchInput
+                  autoComplete="off"
+                  placeholder={placeHolder}
+                  id={`input-container-${componentName}`}
+                  type={isPassword ? 'password' : 'text'}
+                  value={value}
+                  onChange={e => {
+                    onChangeAndValidation(e.target.value);
+                  }}
+                />
+              )}
+            </ValueTagContainer>
+          )}
+        </div>
+        {icon && <Icon className="icon" icon={IconsStore.getIcon(icon)} width={iconSize} />}
+      </FieldContainer>
+    </div>
+  );
+};
+
+Paragraph.propTypes = {
+  placeHolder: PropTypes.string,
+  fieldValue: PropTypes.string,
+  fieldLabel: PropTypes.string.isRequired,
+  componentName: PropTypes.string,
+  fieldTag: PropTypes.string,
+  icon: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  iconSize: PropTypes.number,
+  extendDropDownStyle: PropTypes.string,
+  validation: PropTypes.array,
+  isDisabled: PropTypes.bool,
+  isRequired: PropTypes.bool,
+  range: PropTypes.array,
+  isValid: PropTypes.bool,
+  isPassword: PropTypes.bool,
+};
+export default Paragraph;

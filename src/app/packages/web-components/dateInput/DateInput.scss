@@ -1,0 +1,122 @@
+@import '../shared/FontSizes.scss';
+@import '../shared/Variables.scss';
+@import '../shared/Colors.scss';
+@import '../shared/Mixins.scss';
+
+.input-date-container {
+  position: relative;
+  width: 100%;
+
+  .input-container--calendar {
+    @include center-vertical;
+
+    border-bottom: 1px solid $default-grey;
+    cursor: pointer;
+    justify-content: space-between;
+    min-width: 96px;
+    outline: 0;
+    padding: 7px 0 6px;
+
+    &.input-container--active {
+      border-bottom-color: $vezeeta-blue;
+    }
+
+    &.input-date-container--danger {
+      border-bottom-color: $vezeeta-red;
+    }
+
+    .input-value {
+      @include placeholder(rgba($default-grey, 0.5));
+      margin-right: 24px;
+
+      @include desktop {
+        font-size: $body-en;
+        &:lang(ar) {
+          font-size: $body-ar;
+        }
+      }
+
+      @include mobile {
+        font-size: $body-en--mobile;
+
+        &:lang(ar) {
+          font-size: $body-ar--mobile;
+        }
+      }
+
+      background-color: transparent;
+      border: 0;
+      color: $default-grey;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .input-value-reverse {
+      @include placeholder(rgba($default-grey, 0.5));
+      margin-left: 24px;
+
+      @include desktop {
+        font-size: $body-en;
+        &:lang(ar) {
+          font-size: $body-ar;
+        }
+      }
+
+      @include mobile {
+        font-size: $body-en--mobile;
+
+        &:lang(ar) {
+          font-size: $body-ar--mobile;
+        }
+      }
+
+      background-color: transparent;
+      border: 0;
+      color: $default-grey;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .icon-container {
+      @include center;
+
+      position: relative;
+      right: 0;
+      transition: transform 200ms ease-in-out;
+
+      &.icon--down {
+        transform: rotate(0);
+      }
+
+      &.icon--up {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .date-input-error {
+    position: absolute;
+    color: $vezeeta-red;
+    font-size: $caption-en;
+    font-weight: 500;
+  }
+
+  .calendar {
+    position: absolute;
+    z-index: 10;
+  }
+
+  .calendar-show {
+    display: block;
+  }
+
+  .calendar-hide {
+    display: none;
+  }
+}
+
+.input-date-container--disabled {
+  cursor: default;
+  opacity: 0.5;
+  pointer-events: none;
+}

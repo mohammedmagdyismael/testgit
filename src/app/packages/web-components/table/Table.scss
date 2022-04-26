@@ -1,0 +1,88 @@
+@import '../shared/Colors.scss';
+@import '../shared/Mixins.scss';
+@import '../shared/FontSizes.scss';
+@import '../shared/Variables.scss';
+
+.table--container {
+  .rt-table {
+    .rt-thead {
+      box-shadow: none;
+      .rt-th {
+        border: 1px solid $medium-grey;
+        background-color: rgba($color: $light-grey, $alpha: 0.5);
+        &:focus {
+          outline: none;
+        }
+        .rt-resizable-header-content .header {
+          padding: $spacing-3;
+          text-align: left;
+          color: $helper-grey;
+          font-weight: 600;
+          margin: 0;
+        }
+      }
+    }
+    .rt-tbody {
+      .rt-tr {
+        .rt-td {
+          @include desktop {
+            font-size: $subheading-en;
+
+            &:lang(ar) {
+              font-size: $subheading-ar;
+            }
+          }
+          @include mobile {
+            font-size: $subheading-en--mobile;
+
+            &:lang(ar) {
+              font-size: $subheading-ar--mobile;
+            }
+          }
+          font-weight: 500;
+          color: $helper-grey;
+          padding: $spacing-4 $spacing-3;
+        }
+      }
+    }
+  }
+  .pagination-bottom {
+    .-pagination {
+      box-shadow: none;
+      border: none;
+
+      .pagination-button {
+        @include center;
+        @include center-vertical;
+        @include border-radius($spacing-1);
+        min-width: 50px;
+        height: 50px;
+        background-color: $vezeeta-blue;
+        border: 1px solid $medium-grey;
+        &:disabled .btn-text {
+          color: white !important;
+        }
+        &:not(.pagination-button_active) {
+          background-color: white;
+          .pagination-option--icon {
+            color: $vezeeta-blue;
+          }
+          label {
+            color: $vezeeta-blue;
+          }
+          &:hover {
+            &:not(:disabled) {
+              background-color: $vezeeta-blue;
+              .pagination-option--icon {
+                color: white;
+              }
+              label {
+                color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

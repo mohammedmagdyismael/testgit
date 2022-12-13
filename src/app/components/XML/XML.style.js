@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const Panel = styled.div``;
 export const XMLCode = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
 `;

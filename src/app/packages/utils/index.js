@@ -7,7 +7,6 @@
 
 import API from './Api';
 import STATUS from './Status';
-import FIELDS from './Constants';
 import { jsonToQueryString, parseQueryString } from './Converters';
 import { addDaysToDate, getNumberOfDaysBetweenTwoDates } from './Date';
 import { encrypt, decodeJwtToken, decrypt } from './Encryption';
@@ -20,7 +19,6 @@ import Urls from './Urls';
 export {
   API,
   STATUS,
-  FIELDS,
   validateFields,
   validatePhoneNumber,
   isFound,

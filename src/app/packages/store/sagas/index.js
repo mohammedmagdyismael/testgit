@@ -1,8 +1,8 @@
 import { fork } from 'redux-saga/effects';
-import actionsSaga from './accounts';
+import actionsSaga from './actions';
 
 const sagas = [
-  actionsSaga
+  actionsSaga,
 ];
 
 export default function* rootSaga() {

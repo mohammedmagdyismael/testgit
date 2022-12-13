@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Resume from 'views/Resume';
-
 import Layout from 'app/layout';
+import Calendar from './views/TraktMovies';
+
 import './App.css'
 
 const App = ({ ...props }) => {
@@ -26,14 +26,14 @@ const App = ({ ...props }) => {
         },
     ];
 
+    const component = <Calendar />
+
     return (
-        <Layout headers={headers}>    
-            <BrowserRouter>
+        <BrowserRouter>
                 <Routes>
-                <Route exact path="/" element={<Resume />} />
+                <Route exact path="/" element={component} />
                 </Routes>
             </BrowserRouter>
-        </Layout>
     )
 }
 

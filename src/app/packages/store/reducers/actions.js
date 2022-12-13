@@ -1,18 +1,31 @@
 import { status } from '../enum';
-import { ACCOUNTS } from '../actions/actions';
+import { MOVIES } from '../actions/actions';
 
 const initialState = {
-  info: undefined,
-  infoLoadStatus: status.SHOULD_CALL_API,
+  movies: undefined,
+  moviesLoadStatus: status.SHOULD_CALL_API,
 };
 
 export default (state = initialState, { type, ...payload }) => {
   switch (type) {
-    case ACCOUNTS.SET_INFO:
+    case MOVIES.GET_MOVIES:
       return {
         ...state,
-        info: payload.payload,
+        moviesLoadStatus: status.FETCHING,
       };
+
+    case MOVIES.GET_MOVIES_SUCCESS:
+    return {
+      ...state,
+      movies: payload.payload.response,
+      moviesLoadStatus: status.SUCCESS,
+    };
+
+    case MOVIES.GET_MOVIES_FAILED:
+    return {
+      ...state,
+      moviesLoadStatus: status.FAIL,
+    };
 
     default:
       return state;

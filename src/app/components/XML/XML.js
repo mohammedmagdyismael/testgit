@@ -9,6 +9,7 @@ class XML extends React.Component{
         this.state = {
             xml: '', //# #document
             resultedTemplate: '',
+            XMLForm: '',
         }
     }
 
@@ -17,7 +18,7 @@ class XML extends React.Component{
         let targetedParam = Array.from(xml.getElementsByTagName("ListOfParameters")[0].getElementsByTagName("Parameter"))[idx];
         targetedParam.getElementsByTagName("PlaceHolder")[0].textContent = e.target.value;
         Array.from(xml.getElementsByTagName("ListOfParameters")[0].getElementsByTagName("Parameter"))[idx] = targetedParam;
-        this.setState({xml});
+        this.setState({xml}, () => {this.print()});
     }
 
     xmlFileParser = data => {
@@ -29,6 +30,7 @@ class XML extends React.Component{
         const { xml } = this.state;
         var s = new XMLSerializer();
         var newXmlStr = s.serializeToString(xml);
+        this.setState({ XMLForm: newXmlStr});
         console.log(newXmlStr);
     }
 
@@ -48,18 +50,21 @@ class XML extends React.Component{
                     <input onChange={e => this.updateXML(e, idx)}/>
                 </div>)
             })
-            this.setState({xml , parameterFieldsList });
+            this.setState({xml , parameterFieldsList }, () => { this.print(); });
          });
     }
 
     render(){
-        const { parameterFieldsList } = this.state; 
+        const { parameterFieldsList, XMLForm } = this.state; 
         return( 
             <Container>
                 <Panel>
-                    <XMLCode>
-                        {parameterFieldsList}
-                    </XMLCode> 
+                    <div style={{ display: 'flex', padding: '0px 15px'}}>
+                        <XMLCode>
+                            {parameterFieldsList}
+                        </XMLCode> 
+                        <p style={{ padding: '0px 35px'}}>{XMLForm}</p>
+                    </div>
                     <Btn onClick={()=>this.print()}>
                         <p>Submit template</p>
                     </Btn>

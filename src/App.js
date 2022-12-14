@@ -1,9 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import Layout from 'app/layout';
-import Calendar from './views/TraktMovies';
-
+import Calendar from './app/components/RoomView';
 import './App.css'
 
 const App = ({ ...props }) => {
@@ -28,13 +24,7 @@ const App = ({ ...props }) => {
 
     const component = <Calendar />
 
-    return (
-        <BrowserRouter>
-                <Routes>
-                <Route exact path="/" element={component} />
-                </Routes>
-            </BrowserRouter>
-    )
+    return (component)
 }
 
 export default App;
